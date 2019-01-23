@@ -3,11 +3,13 @@
 import pyperclip
 import re
 
-phoneRegex = re.compile(r'((\d{3}|\(\d{3}\))(\s|-|\.)?(\d{3})(\s|-|\.)?(\d{2,4})(\s|-|\.)?(\d{2})?(\s*(ext|x|ext.)\s*(\d{2,5}))?)')
+phoneRegex = re.compile(
+    r'((\d{3}|\(\d{3}\))(\s|-|\.)?(\d{3})(\s|-|\.)?(\d{2,4})(\s|-|\.)?(\d{2})?(\s*(ext|x|ext.)\s*(\d{2,5}))?)')
 
 emailRegex = re.compile(r'([a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,4})')
 
-linkRegex = re.compile(r'((https|http|ftp):\/\/)([a-zA-Z0-9]+)([.a-zA-Z]+)*([\/a-zA-Z0-9]+)*(\.(html|php))?')
+linkRegex = re.compile(
+    r'((https|http|ftp):\/\/)([a-zA-Z0-9]+)([.a-zA-Z]+)*([\/a-zA-Z0-9]+)*(\.(html|php))?')
 text = str(pyperclip.paste())
 matches = []
 for groups in phoneRegex.findall(text):
