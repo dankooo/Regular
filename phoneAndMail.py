@@ -3,19 +3,36 @@
 import pyperclip
 import re
 
-phoneRegex = re.compile(
-    r'((\d{3}|\(\d{3}\))(\s|-|\.)?(\d{3})(\s|-|\.)?(\d{2,4})(\s|-|\.)?(\d{2})?(\s*(ext|x|ext.)\s*(\d{2,5}))?)')
+phoneRegex = re.compile(r'''(
+    (\+?[0-9]{1,4})
+    (\s|-|\.)?
+    (\d\d\d(\d)?|\(\d\d\d(\d)?\))
+    (\s|-|\.)?
+    (\d\d\d|\d\d)
+    (\s|-|\.)?
+    (\d\d)
+    (\s|-|\.)?
+    (\d\d)
+    )''', re.VERBOSE)
 
-emailRegex = re.compile(r'([a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,4})')
+emailRegex = re.compile(r'''(
+    [a-zA-Z0-9._%+-]+
+    @
+    [a-zA-Z0-9-]+
+    \.
+    [a-zA-Z]{2,4}
+    )''',re.VERBOSE)
 
-linkRegex = re.compile(
-    r'((https|http|ftp):\/\/)([a-zA-Z0-9]+)([.a-zA-Z]+)*([\/a-zA-Z0-9]+)*(\.(html|php))?')
+linkRegex = re.compile(r'''(
+    ((https|http|ftp):\/\/)?
+    ([a-zA-Z0-9а-яА-Я.]+\.[а-яА-Яa-zA-Z]{2,4})
+    ((\/[a-zA-Z0-9-%_]+)*)?
+    (\.(html|php))?
+    )''',re.VERBOSE)
 text = str(pyperclip.paste())
 matches = []
 for groups in phoneRegex.findall(text):
-    phoneNum = '-'.join([groups[1], groups[3], groups[5], groups[7]])
-    if groups[8] != '':
-        phoneNum += ' x' + groups[8]
+    phoneNum = str(groups[0])
     matches.append(phoneNum)
 for groups in emailRegex.findall(text):
     matches.append(groups[0])
