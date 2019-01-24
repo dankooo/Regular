@@ -26,7 +26,7 @@ emailRegex = re.compile(r'''(
 linkRegex = re.compile(r'''(
     ((https|http|ftp):\/\/)?
     ([a-zA-Z0-9а-яА-Я.]+\.[а-яА-Яa-zA-Z]{2,4})
-    ((\/[a-zA-Z0-9-%_]+)*)?
+    ((\/[a-zA-Z0-9-%_?|=]+)*)?
     (\.(html|php))?
     )''',re.VERBOSE)
 text = str(pyperclip.paste())
